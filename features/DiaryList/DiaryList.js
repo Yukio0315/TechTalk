@@ -14,18 +14,15 @@ class DiaryList extends Component {
     const list = this.props.diaryList.list.map(diary => {
       return (
         <View key={`diary_${diary.date}`}>
+          <Text className="date-head">Date:</Text>
           <Text className="date">{moment(diary.date).format("YYYY-MM-DD")}</Text>
+          <Text className="title-head">Title:</Text>
           <Text className="title">{diary.title}</Text>
         </View>
       )
     });
     return (
-      <View className="diary">
-        <Text>Diary</Text>
-        <View className="diaryList">
-          {list}
-        </View>
-      </View>
+      <View className="diaryList">{list}</View>
     );
   }
 }
