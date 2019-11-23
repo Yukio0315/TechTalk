@@ -11,9 +11,9 @@ class DiaryList extends Component {
   }
 
   render() {
-    const list = this.props.diaryList.list.map(diary => {
+    const list = this.props.diaryList.list.map((diary, index) => {
       return (
-        <TouchableOpacity key={`diary_${diary.date}`} onPress={() => {this.props.selectDiary(diary)}}>
+        <TouchableOpacity key={`diary_${moment(diary.date).format("YYYYMMDD")}`} onPress={() => {this.props.selectDiary(diary, index)}}>
           <View>
             <Text className="date-head">Date:</Text>
             <Text className="date">{moment(diary.date).format("YYYY-MM-DD")}</Text>

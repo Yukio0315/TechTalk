@@ -1,9 +1,10 @@
 import LIST from './actions';
 
-export const selectDiary = diary => {
+export const selectDiary = (diary, index) => {
   return {
     type: LIST.SELECT,
-    diary
+    diary,
+    selectedIndex: index,
   };
 };
 
@@ -15,5 +16,12 @@ export const createNewDiary = () => {
       date: new Date(),
       text: "",
     }
+  };
+};
+
+export const editDiary = diary => {
+  return {
+    type: LIST.EDIT_TITLE,
+    diary
   };
 };
