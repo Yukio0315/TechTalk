@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment'
 import { selectDiary, createNewDiary } from '../../redux/diaryList/actions/actionCreators';
@@ -13,12 +13,14 @@ class DiaryList extends Component {
   render() {
     const list = this.props.diaryList.list.map(diary => {
       return (
-        <View key={`diary_${diary.date}`}>
-          <Text className="date-head">Date:</Text>
-          <Text className="date">{moment(diary.date).format("YYYY-MM-DD")}</Text>
-          <Text className="title-head">Title:</Text>
+        <TouchableOpacity key={`diary_${diary.date}`} onPress={() => {this.props.selectDiary(diary)}}>
+          <View>
+            <Text className="date-head">Date:</Text>
+            <Text className="date">{moment(diary.date).format("YYYY-MM-DD")}</Text>
+            <Text className="title-head">Title:</Text>
           <Text className="title">{diary.title}</Text>
         </View>
+        </TouchableOpacity>
       )
     });
     return (
@@ -27,16 +29,7 @@ class DiaryList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return state
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    createNewDiary() {
-      dispatch(createNewDiary())
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DiaryList);
+export default connect(
+  state => state,
+  {createNewDiary, selectDiary}
+)(DiaryList);
