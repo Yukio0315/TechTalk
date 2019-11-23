@@ -4,7 +4,7 @@ export const selectDiary = (diary, index) => {
   return {
     type: LIST.SELECT,
     diary,
-    selectedIndex: index,
+    index,
   };
 };
 
@@ -21,7 +21,15 @@ export const createNewDiary = () => {
 
 export const editDiary = diary => {
   return {
-    type: LIST.EDIT_TITLE,
+    type: LIST.EDIT,
     diary
+  };
+};
+
+export const editDone = () => {
+  return {
+    type: LIST.DONE,
+    selectedIndex: null,
+    selectedDiary: null,
   };
 };

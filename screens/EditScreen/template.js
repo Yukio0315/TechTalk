@@ -1,18 +1,30 @@
-import Title from './Title/Title';
-import Body from './Body/Body';
 import styles from './styles';
 import React from 'react';
-import {View, Text, ScrollView, SafeAreaView} from 'react-native';
+import { connect } from 'react-redux';
+import { editDiary, editDone } from '../../redux/diaryList/actions/actionCreators';
+import {View, Text, ScrollView, SafeAreaView, TextInput, Button} from 'react-native';
 
-export default (props) => {
+const EditScreen = (props) => {
   console.log(props);
   return (
     <SafeAreaView style={styles.edit}>
-    <View><Text>Edit Diary</Text></View>
-      <ScrollView >
-        <Title />
-        <Body />
+      <View><Text>Edit Diary</Text></View>
+      <ScrollView>
+        <View>
+          <Text>Title:</Text>
+          <TextInput />
+        </View>
+        <View>
+          <Text>Diary:</Text>
+          <TextInput />
+        </View>
+        <Button title="Done" onPress={() => props.editDone()} />
       </ScrollView>
     </SafeAreaView>
-  )
+  );
 }
+
+export default connect(
+  state => state,
+  {editDiary, editDone}
+)(EditScreen);

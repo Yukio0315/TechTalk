@@ -21,6 +21,12 @@ export default (state = initialState, action) => {
         selectedDiary: state.diary,
         selectedIndex: state.index
       })
+    case LIST.DONE:
+      return Object.assign({}, state, {
+        list: state.list,
+        selectedDiary: null,
+        selectedIndex: null
+      })
     default:
       return state;
   }

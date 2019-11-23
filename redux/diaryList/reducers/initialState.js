@@ -1,5 +1,6 @@
 export default {
   list: [],
   selectedDiary: null,
-  selectedIndex: null
+  selectedIndex: null,
+  done: null
 };
