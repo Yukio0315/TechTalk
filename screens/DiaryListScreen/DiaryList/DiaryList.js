@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment'
-import { selectDiary, createNewDiary } from '../../redux/diaryList/actions/actionCreators';
+import { createNewDiary, selectDiary } from '../../../redux/diaryList/actions/actionCreators';
 
 class DiaryList extends Component {
   componentDidMount() {

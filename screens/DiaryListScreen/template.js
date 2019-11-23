@@ -1,4 +1,4 @@
-import DiaryList from '../../features/DiaryList/DiaryList'
+import DiaryList from './DiaryList/DiaryList'
 import styles from './styles'
 import React from 'react';
 import {View, Text, ScrollView, SafeAreaView} from 'react-native'

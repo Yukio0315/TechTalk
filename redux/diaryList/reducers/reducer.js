@@ -4,7 +4,7 @@ import initialState from './initialState';
 export default (state = initialState, action) => {
   switch (action.type) {
     case LIST.SELECT:
-      return [...state, action];
+      return action.diary;
     case LIST.CREATE:
       return {
         ...state,
