@@ -1,20 +1,27 @@
 module.exports = {
-  "extends": ["airbnb", "prettier", "prettier/react"],
-  "rules": {
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".js", ".jsx"]
-      }
-    ],
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "es5",
-        "singleQuote": true,
-        "printWidth": 100
-      }
-    ]
+  env: {
+    es6: true,
+    node: true,
   },
-  "plugins": ["prettier"]
-}
+  parser: "babel-eslint",
+  plugins: ["react", "prettier" "react-redux"],
+  parserOptions: {
+    version: 2018,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  extends: ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended", "prettier/react", "plugin:react-redux/recommended"],
+  rules: {
+    "prettier/prettier": "error",
+    "react/prop-types": [0],
+    "react-redux/connect-prefer-named-arguments": 2
+  },
+  globals: {
+    window: true,
+    document: true,
+    navigator: true,
+    fetch: true,
+  },
+};

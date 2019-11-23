@@ -1,4 +1,4 @@
 export default {
   list: [],
-  selectedDiary: 0,
+  selectedDiary: null
 };

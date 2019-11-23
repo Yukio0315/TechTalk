@@ -3,13 +3,14 @@ import initialState from './initialState';
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case LIST.SHOW:
+    case LIST.SELECT:
       return [...state, action];
     case LIST.CREATE:
-      return [...state, action.diary];
+      return {
+        ...state,
+        list: [...state.list, action.diary]
+      }
     default:
       return state;
   }
 };
-
-// export default diaryList;
