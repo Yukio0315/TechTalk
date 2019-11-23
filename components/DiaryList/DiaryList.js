@@ -11,19 +11,20 @@ class DiaryList extends Component {
   }
 
   render() {
-    const list = [];
-    for(let i = 0; i < this.props.diaryList.length; i++) {
-      const diary = this.props.diaryList[i];
-      list.push(
+    const list = this.props.diaryList.list.map(diary => {
+      return (
         <View key={`diary_${diary.date}`}>
-          <Text className="date">{diary.date}</Text>
+          <Text className="date">{moment(diary.date).format("YYYY-MM-DD")}</Text>
           <Text className="title">{diary.title}</Text>
-        </View>);
-    }
+        </View>
+      )
+    });
     return (
       <View className="diary">
         <Text>Diary</Text>
-        <View className="diaryList">{list}</View>
+        <View className="diaryList">
+          {list}
+        </View>
       </View>
     );
   }
