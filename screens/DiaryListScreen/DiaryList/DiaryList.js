@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment'
 import { createNewDiary, selectDiary } from '../../../redux/diaryList/actions/actionCreators';
-import { Card,  } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 
 class DiaryList extends Component {
   componentDidMount() {

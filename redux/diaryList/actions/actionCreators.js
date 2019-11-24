@@ -42,3 +42,15 @@ export const saveAutomatically = (edited, selected) => {
     index: selected.selectedIndex
   };
 };
+
+export const addNewDiary = (date, index) => {
+  return {
+    type: LIST.ADD,
+    diary: {
+      title: '',
+      date,
+      text: '',
+    },
+    index
+  };
+};
