@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment'
 import { createNewDiary, selectDiary } from '../../../redux/diaryList/actions/actionCreators';
+import { Card,  } from 'react-native-elements';
 
 class DiaryList extends Component {
   componentDidMount() {
@@ -14,15 +15,15 @@ class DiaryList extends Component {
     const list = this.props.diaryList.list.map((diary, index) => {
       return (
         <TouchableOpacity key={`diary_${moment(diary.date).format("YYYYMMDD")}`} onPress={() => {this.props.selectDiary(diary, index)}}>
-          <View>
+          <Card>
             <Text className="date-head">Date:</Text>
             <Text className="date">{moment(diary.date).format("YYYY-MM-DD")}</Text>
             <Text className="title-head">Title:</Text>
           <Text className="title">{diary.title}</Text>
-        </View>
+        </Card>
         </TouchableOpacity>
       )
-    });
+    }).reverse();
     return (
       <View className="diaryList">{list}</View>
     );
