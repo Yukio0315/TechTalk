@@ -19,17 +19,14 @@ export const createNewDiary = () => {
   };
 };
 
-export const editDiary = diary => {
-  return {
-    type: LIST.EDIT,
-    diary
-  };
-};
-
-export const editDone = () => {
+export const editDone = (edited, selected) => {
   return {
     type: LIST.DONE,
-    selectedIndex: null,
-    selectedDiary: null,
+    diary: {
+      title: edited.title,
+      date: selected.selectedDiary.date,
+      text: edited.text,
+    },
+    index: selected.selectedIndex
   };
 };

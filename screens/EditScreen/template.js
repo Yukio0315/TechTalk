@@ -1,30 +1,43 @@
 import styles from './styles';
 import React from 'react';
 import { connect } from 'react-redux';
-import { editDiary, editDone } from '../../redux/diaryList/actions/actionCreators';
+import { editDone } from '../../redux/diaryList/actions/actionCreators';
 import {View, Text, ScrollView, SafeAreaView, TextInput, Button} from 'react-native';
 
-const EditScreen = (props) => {
-  console.log(props);
-  return (
-    <SafeAreaView style={styles.edit}>
-      <View><Text>Edit Diary</Text></View>
-      <ScrollView>
-        <View>
-          <Text>Title:</Text>
-          <TextInput />
-        </View>
-        <View>
-          <Text>Diary:</Text>
-          <TextInput />
-        </View>
-        <Button title="Done" onPress={() => props.editDone()} />
-      </ScrollView>
-    </SafeAreaView>
-  );
+class EditScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    state = {
+      title: '',
+      text: '',
+    }
+  }
+
+  componentWillMount() {
+    this.setState({title: this.props.diaryList.selectedDiary.title, text: this.props.diaryList.selectedDiary.text})
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={styles.edit}>
+        <View><Text>Edit Diary</Text></View>
+        <ScrollView>
+          <View>
+            <Text>Title:</Text>
+            <TextInput value={this.state.title} onChangeText={title => this.setState({title})} />
+          </View>
+          <View>
+            <Text>Diary:</Text>
+            <TextInput value={this.state.text} onChangeText={text => this.setState({text})} />
+          </View>
+          <Button title="Done" onPress={() => this.props.editDone(this.state, this.props.diaryList)} />
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 }
 
 export default connect(
   state => state,
-  {editDiary, editDone}
+  { editDone }
 )(EditScreen);

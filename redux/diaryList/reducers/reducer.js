@@ -15,15 +15,9 @@ export default (state = initialState, action) => {
         selectedDiary: null,
         selectedIndex: null
       })
-    case LIST.EDIT:
-      return Object.assign({}, state, {
-        list: [...state.list].splice(action.index, 1, action.diary),
-        selectedDiary: state.diary,
-        selectedIndex: state.index
-      })
     case LIST.DONE:
       return Object.assign({}, state, {
-        list: state.list,
+        list: [...state.list].slice(0, action.index).concat(action.diary),
         selectedDiary: null,
         selectedIndex: null
       })
