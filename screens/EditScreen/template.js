@@ -27,7 +27,7 @@ class EditScreen extends React.Component {
   }
 
   componentDidUpdate() {
-    if(!this.state.timeoutId) {
+    if(!this.state.timeoutId && !this.state.saved) {
       const timeoutId = setTimeout(() => {
           this.setState({ saved: true, timeoutId: null });
           this.props.saveAutomatically(this.state, this.props.diaryList);
