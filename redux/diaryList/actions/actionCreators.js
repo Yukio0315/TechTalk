@@ -29,4 +29,16 @@ export const editDone = (edited, selected) => {
     },
     index: selected.selectedIndex
   };
+}
+
+export const saveAutomatically = (edited, selected) => {
+  return {
+    type: LIST.AUTO_SAVE,
+    diary: {
+      title: edited.title,
+      date: selected.selectedDiary.date,
+      text: edited.text,
+    },
+    index: selected.selectedIndex
+  };
 };

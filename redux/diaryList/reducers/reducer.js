@@ -21,6 +21,12 @@ export default (state = initialState, action) => {
         selectedDiary: null,
         selectedIndex: null
       })
+    case LIST.AUTO_SAVE:
+      return Object.assign({}, state, {
+        list: [...state.list].slice(0, action.index).concat(action.diary),
+        selectedDiary: action.diary,
+        selectedIndex: action.index
+      })
     default:
       return state;
   }
