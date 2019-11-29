@@ -7,16 +7,12 @@ import {View, Text, ScrollView, SafeAreaView, TextInput, Button} from 'react-nat
 class EditScreen extends React.Component {
   constructor(props) {
     super(props);
-    state = {
-      title: '',
-      text: '',
+    this.state = {
+      title: this.props.diaryList.selectedDiary.title,
+      text: this.props.diaryList.selectedDiary.text,
       saved: false,
       timeoutId: null,
     }
-  }
-
-  componentWillMount() {
-    this.setState({title: this.props.diaryList.selectedDiary.title, text: this.props.diaryList.selectedDiary.text})
   }
 
   componentWillUpdate() {

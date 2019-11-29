@@ -8,7 +8,7 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
     paddingTop: STATUSBAR_HEIGHT
   },
-  titlebar: {
+  titleBar: {
     justifyContent: 'center',
     flexDirection: 'row',
     backgroundColor: 'skyblue',

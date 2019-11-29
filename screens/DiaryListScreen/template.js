@@ -8,10 +8,10 @@ export default () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View style={styles.titlebar}>
+        <View style={styles.titleBar}>
             <Image source={require('../../assets/images/book.png')} style={styles.bookImage}/>
             <Text style={styles.title}>
-            My Daily Diary
+            Pla Pla
             </Text>
             <Image source={require('../../assets/images/fountain-pen.png')} style={styles.penImage}/>
         </View>
