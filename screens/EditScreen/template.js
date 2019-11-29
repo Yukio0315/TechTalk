@@ -26,9 +26,15 @@ class EditScreen extends React.Component {
   }
 
   componentDidUpdate() {
-    if(!this.state.timeoutId && !this.state.saved && this.state.text && this.state.title) {
+    if(!this.state.timeoutId
+      && !this.state.saved
+      && !!this.state.text
+      && !!this.state.title
+      && (this.props.diaryList.selectedDiary.title !== this.state.title
+      || this.props.diaryList.selectedDiary.text !== this.state.text)
+    ) {
       const timeoutId = setTimeout(() => {
-          this.setState({ saved: true, timeoutId: null });
+          this.setState({ saved: true, timeoutId: null, edited: false });
           this.props.saveAutomatically(this.state, this.props.diaryList);
       }, 3000)
       this.setState({timeoutId})
@@ -51,7 +57,11 @@ class EditScreen extends React.Component {
           return (<TouchableOpacity style={styles.touchable}><Button title="Back" onPress={() => this.props.backNoEdited(this.props.diaryList.selectedIndex)} /></TouchableOpacity>);
         }
       } else {
-        if(!this.state.saved && !!this.state.title && !!this.state.text) {
+        if(this.state.title !== this.props.diaryList.selectedDiary.title && this.state.text !== this.props.diaryList.selectedDiary.text) {
+          return (<TouchableOpacity style={styles.touchable}><Button title="Save" onPress={() => this.props.editDone(this.state, this.props.diaryList)} /></TouchableOpacity>);
+        } else if(this.state.title === this.props.diaryList.selectedDiary.title && this.state.text === this.props.diaryList.selectedDiary.text && !!this.state.edited) {
+          return (<TouchableOpacity style={styles.touchable}><Button title="Back" onPress={() => this.props.back()} /></TouchableOpacity>);
+        } else if(!this.state.saved && !!this.state.edited && !!this.state.title && !!this.state.text) {
           return (<TouchableOpacity style={styles.touchable}><Button title="Save" onPress={() => this.props.editDone(this.state, this.props.diaryList)} /></TouchableOpacity>);
         } else {
           return (<TouchableOpacity style={styles.touchable}><Button title="Back" onPress={() => this.props.back()} /></TouchableOpacity>);

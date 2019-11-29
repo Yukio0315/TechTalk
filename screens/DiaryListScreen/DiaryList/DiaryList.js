@@ -16,10 +16,10 @@ class DiaryList extends Component {
       return (
         <TouchableOpacity key={`diary_${moment(diary.date).format("YYYYMMDD")}`} onPress={() => {this.props.selectDiary(diary, index)}}>
           <Card>
-            <Text className="date-head">Date:</Text>
-            <Text className="date">{moment(diary.date).format("YYYY-MM-DD")}</Text>
-            <Text className="title-head">Title:</Text>
-          <Text className="title">{diary.title}</Text>
+            <Text>Date:</Text>
+            <Text>{moment(diary.date).format("YYYY-MM-DD")}</Text>
+            <Text>Title:</Text>
+          <Text>{diary.title}</Text>
         </Card>
         </TouchableOpacity>
       )
