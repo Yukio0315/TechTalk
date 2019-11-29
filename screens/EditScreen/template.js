@@ -1,5 +1,6 @@
 import styles from './styles';
 import React from 'react';
+import moment from 'moment'
 import { connect } from 'react-redux';
 import { editDone, saveAutomatically } from '../../redux/diaryList/actions/actionCreators';
 import {View, Text, ScrollView, SafeAreaView, TextInput, Button} from 'react-native';
@@ -44,6 +45,7 @@ class EditScreen extends React.Component {
     return (
       <SafeAreaView style={styles.edit}>
         <View><Text>Edit Diary</Text></View>
+        <View><Text>{moment(this.props.diaryList.date).format("YYYY-MM-DD")}</Text></View>
         <View>{saved()}</View>
         <ScrollView>
           <View>
