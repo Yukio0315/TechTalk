@@ -4,6 +4,7 @@ import moment from 'moment'
 import { connect } from 'react-redux';
 import { editDone, saveAutomatically } from '../../redux/diaryList/actions/actionCreators';
 import {View, Text, ScrollView, SafeAreaView, TextInput, Button} from 'react-native';
+import {Input} from 'react-native-elements'
 
 class EditScreen extends React.Component {
   constructor(props) {
@@ -44,19 +45,19 @@ class EditScreen extends React.Component {
     }
     return (
       <SafeAreaView style={styles.edit}>
-        <View><Text>Edit Diary</Text></View>
-        <View><Text>{moment(this.props.diaryList.date).format("YYYY-MM-DD")}</Text></View>
-        <View>{saved()}</View>
+        <View style={styles.head}><Text style={styles.titleText}>Edit Diary</Text></View>
+        <View style={styles.time}><Text>{moment(this.props.diaryList.selectedDiary.date).format("YYYY-MM-DD")}</Text></View>
+        <View style={styles.saved}>{saved()}</View>
         <ScrollView>
-          <View>
-            <Text>Title:</Text>
-            <TextInput value={this.state.title} onChangeText={title => this.setState({title, saved: false})} />
+          <View style={styles.titleBox}>
+            <Text style={styles.title}>Title:</Text>
+            <Input placeholder="Title" style={styles.input} value={this.state.title} onChangeText={title => this.setState({title, saved: false})} />
           </View>
           <View>
-            <Text>Diary:</Text>
-            <TextInput value={this.state.text} onChangeText={text => this.setState({text, saved: false})} />
+            <Text style={styles.diary}>Diary:</Text>
+            <Input placeholder='What happened?' style={styles.input2} value={this.state.text} onChangeText={text => this.setState({text, saved: false})} />
           </View>
-          <Button title="Done" onPress={() => this.props.editDone(this.state, this.props.diaryList)} />
+          <Button style={styles.done} title="Done" onPress={() => this.props.editDone(this.state, this.props.diaryList)} />
         </ScrollView>
       </SafeAreaView>
     );
