@@ -45,6 +45,12 @@ export default (state = initialState, action) => {
         selectedDiary: null,
         selectedIndex: null
       })
+    case LIST.DELETE:
+      return Object.assign({}, state, {
+        list: [...state.list].filter((val, i) => i !== action.index),
+        selectedDiary: null,
+        selectedIndex: null
+      })
     case LIST.BACK_EDITED:
       return Object.assign({}, state, {
         list: state.list,

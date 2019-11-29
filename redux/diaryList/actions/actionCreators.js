@@ -24,6 +24,7 @@ export const back = () => {
     type: LIST.BACK_EDITED
   };
 }
+
 export const backNoEdited = index => {
   return {
     type: LIST.BACK_NO_EDITED,
@@ -63,6 +64,13 @@ export const addNewDiary = (date, index) => {
       date,
       text: '',
     },
+    index
+  };
+};
+
+export const deleteDiary = (index) => {
+  return {
+    type: LIST.DELETE,
     index
   };
 };

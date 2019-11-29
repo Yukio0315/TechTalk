@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
 import moment from 'moment'
-import { createNewDiary, selectDiary } from '../../../redux/diaryList/actions/actionCreators';
-import { Card } from 'react-native-elements';
+import styles from './styles'
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { Icon, Card } from 'react-native-elements';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { createNewDiary, selectDiary, deleteDiary } from '../../../redux/diaryList/actions/actionCreators';
 
 class DiaryList extends Component {
   componentDidMount() {
@@ -20,6 +21,7 @@ class DiaryList extends Component {
             <Text>{moment(diary.date).format("YYYY-MM-DD")}</Text>
             <Text>Title:</Text>
           <Text>{diary.title}</Text>
+          <View style={styles.delete}><Icon name="delete" type='material' onPress={() => {this.props.deleteDiary(index)}} /></View>
         </Card>
         </TouchableOpacity>
       )
@@ -32,5 +34,5 @@ class DiaryList extends Component {
 
 export default connect(
   state => state,
-  {createNewDiary, selectDiary}
+  {createNewDiary, selectDiary, deleteDiary}
 )(DiaryList);

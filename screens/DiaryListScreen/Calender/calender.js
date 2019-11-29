@@ -31,16 +31,20 @@ class CalenderComponent extends Component {
       if(!this.state.add) return (<View style={styles.plus}><Icon name="plus-square" type='font-awesome' onPress={() => {this.setState({add:!this.state.add})}} /></View>);
       if(this.state.add) {
         return (
-         <View><View style={styles.plus}><Icon name="plus-square" type='font-awesome'/></View>
-         <Overlay isVisible={this.state.add}  height="auto" onBackdropPress={() => {this.setState({add:!this.state.add})}}><Calendar
-          onDayPress={(day) => {
-            const index = dateToInsertIndex(day.dateString);
-            this.props.addNewDiary(day.dateString, index);
-            this.setState({add:!this.state.add});
-          }}
-          markedDates={disableDays}
-          maxDate={new Date()}
-        /></Overlay></View>);
+         <View>
+          <View style={styles.plus}><Icon name="plus-square" type='font-awesome'/></View>
+          <Overlay isVisible={this.state.add}  height="auto" onBackdropPress={() => {this.setState({add:!this.state.add})}}>
+            <Calendar
+              onDayPress={(day) => {
+                const index = dateToInsertIndex(day.dateString);
+                this.props.addNewDiary(day.dateString, index);
+                this.setState({add:!this.state.add});
+              }}
+              markedDates={disableDays}
+              maxDate={new Date()}
+            />
+          </Overlay>
+        </View>);
       }
     }
     return (
