@@ -19,6 +19,18 @@ export const createNewDiary = () => {
   };
 };
 
+export const back = () => {
+  return {
+    type: LIST.BACK_EDITED
+  };
+}
+export const backNoEdited = index => {
+  return {
+    type: LIST.BACK_NO_EDITED,
+    index,
+  };
+}
+
 export const editDone = (edited, selected) => {
   return {
     type: LIST.DONE,

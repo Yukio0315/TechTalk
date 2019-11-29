@@ -14,12 +14,46 @@ export default StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     backgroundColor: 'green',
-    // marginTop: 20,
     height: 100,
-    // marginTop: 50,
     paddingTop: 30
+  },
+  time: {
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 10,
+    fontSize: 20,
+  },
+  saved: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: 10,
+    height: 300,
+  },
+  savedText: {
+    color: 'red'
+  },
+  title: {
+    marginLeft: 10
   },
   titleText: {
     fontSize: 30,
+  },
+  diary: {
+    marginLeft: 10,
+  },
+  inputBody: {
+    height: 500,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  touchable: {
+    padding: 10,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })

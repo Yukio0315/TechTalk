@@ -2,9 +2,9 @@ import styles from './styles';
 import React from 'react';
 import moment from 'moment'
 import { connect } from 'react-redux';
-import { editDone, saveAutomatically } from '../../redux/diaryList/actions/actionCreators';
-import {View, Text, ScrollView, SafeAreaView, TextInput, Button} from 'react-native';
-import {Input} from 'react-native-elements'
+import { editDone, saveAutomatically, back, backNoEdited} from '../../redux/diaryList/actions/actionCreators';
+import { View, Text, ScrollView, SafeAreaView, TextInput, TouchableOpacity} from 'react-native';
+import { Input, Button } from 'react-native-elements'
 
 class EditScreen extends React.Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class EditScreen extends React.Component {
       text: this.props.diaryList.selectedDiary.text,
       saved: false,
       timeoutId: null,
+      edited: false,
     }
   }
 
@@ -25,7 +26,7 @@ class EditScreen extends React.Component {
   }
 
   componentDidUpdate() {
-    if(!this.state.timeoutId && !this.state.saved) {
+    if(!this.state.timeoutId && !this.state.saved && this.state.text && this.state.title) {
       const timeoutId = setTimeout(() => {
           this.setState({ saved: true, timeoutId: null });
           this.props.saveAutomatically(this.state, this.props.diaryList);
@@ -41,23 +42,45 @@ class EditScreen extends React.Component {
 
   render() {
     const saved = () => {
-      if(this.state.saved) return (<Text>saved</Text>);
+      if(this.state.saved) return (<Text style={styles.savedText}>saved</Text>);
+    }
+    const editedButton = () => {
+      if(!this.props.diaryList.selectedDiary.title && !this.props.diaryList.selectedDiary.text) {
+        if(!this.state.saved && !!this.state.title && !!this.state.text) return (<TouchableOpacity style={styles.touchable}><Button title="Save" onPress={() => this.props.editDone(this.state, this.props.diaryList)} /></TouchableOpacity>);
+        else {
+          return (<TouchableOpacity style={styles.touchable}><Button title="Back" onPress={() => this.props.backNoEdited(this.props.diaryList.selectedIndex)} /></TouchableOpacity>);
+        }
+      } else {
+        if(!this.state.saved && !!this.state.title && !!this.state.text) {
+          return (<TouchableOpacity style={styles.touchable}><Button title="Save" onPress={() => this.props.editDone(this.state, this.props.diaryList)} /></TouchableOpacity>);
+        } else {
+          return (<TouchableOpacity style={styles.touchable}><Button title="Back" onPress={() => this.props.back()} /></TouchableOpacity>);
+        }
+      }
     }
     return (
       <SafeAreaView style={styles.edit}>
         <View style={styles.head}><Text style={styles.titleText}>Edit Diary</Text></View>
-        <View style={styles.time}><Text>{moment(this.props.diaryList.selectedDiary.date).format("YYYY-MM-DD")}</Text></View>
+        <View><Text style={styles.time}>{moment(this.props.diaryList.selectedDiary.date).format("YYYY-MM-DD")}</Text></View>
         <View style={styles.saved}>{saved()}</View>
         <ScrollView>
-          <View style={styles.titleBox}>
+          <View>
             <Text style={styles.title}>Title:</Text>
-            <Input placeholder="Title" style={styles.input} value={this.state.title} onChangeText={title => this.setState({title, saved: false})} />
+            <Input placeholder="Input the Title" value={this.state.title} onChangeText={title => this.setState({title, saved: false, edited: true})} />
           </View>
           <View>
             <Text style={styles.diary}>Diary:</Text>
-            <Input placeholder='What happened?' style={styles.input2} value={this.state.text} onChangeText={text => this.setState({text, saved: false})} />
+            <View style={styles.inputBody}>
+            <TextInput
+              multiline = {true}
+              numberOfLines = {4}
+              placeholder='What happened?'
+              value={this.state.text}
+              onChangeText={text => this.setState({text, saved: false, edited: true})}
+            />
+            </View>
           </View>
-          <Button style={styles.done} title="Done" onPress={() => this.props.editDone(this.state, this.props.diaryList)} />
+          {editedButton()}
         </ScrollView>
       </SafeAreaView>
     );
@@ -66,5 +89,5 @@ class EditScreen extends React.Component {
 
 export default connect(
   state => state,
-  { editDone, saveAutomatically }
+  { editDone, saveAutomatically, back, backNoEdited }
 )(EditScreen);
